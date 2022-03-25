@@ -32,7 +32,4 @@ for gem in parsedBody
     puts "#{gem["name"]}\n"
 end
 
-for arg in ARGV
-    puts arg
-end
-
+exit(true)
