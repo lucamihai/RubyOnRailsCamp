@@ -1,4 +1,8 @@
 require './lib/gemInfo.rb'
+require 'faraday'
+require 'faraday/net_http'
+require 'json'
+Faraday.default_adapter = :net_http
 
 class RubyGemsApi
   def initialize
