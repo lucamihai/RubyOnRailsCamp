@@ -3,29 +3,24 @@ require 'faraday'
 require 'faraday/net_http'
 require 'json'
 require './lib/argumentsParser.rb'
+require './lib/rubyGemsApi.rb'
 Faraday.default_adapter = :net_http
 
 class Program
 
   def self.execute
+    rubyGemsApi = RubyGemsApi.new
+
     arguments = ArgumentsParser.parse
-    uri = "https://rubygems.org/api/v1/search?query=#{arguments.searchParam}"
-    response = Faraday.get(uri)
-    
-    if response.status != 200
-        puts "Error, got status #{response.status}"
-        exit(false)
-    end
-    
-    parsedBody = JSON.parse(response.body)
-    displayParsedBody(parsedBody)
-    
+    gemsInfo = rubyGemsApi.searchGems(arguments.searchTerm)
+    displayGemsInfo(gemsInfo)
   end
 
-  def self.displayParsedBody(parsedBody)
-    puts "Found #{parsedBody.count} gems"
-    for gem in parsedBody
-        puts "#{gem["name"]}\n"
+  def self.displayGemsInfo(gemsInfo)
+    puts "Found #{gemsInfo.count} gems"
+    for gem in gemsInfo
+        puts "#{gem.name}\n"
+        puts "#{gem.info}\n\n"
     end
   end
 

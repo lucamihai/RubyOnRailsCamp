@@ -1,5 +1,5 @@
 class Arguments
-  @searchParam = ''
+  @searchTerm = ''
 
-  attr_accessor :searchParam
+  attr_accessor :searchTerm
 end
