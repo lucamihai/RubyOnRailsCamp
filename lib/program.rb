@@ -14,8 +14,10 @@ class Program
   def self.displayGemsInfo(gemsInfo)
     puts "Found #{gemsInfo.count} gems"
     for gem in gemsInfo
-        puts "#{gem.name}\n"
-        puts "#{gem.info}\n\n"
+      info = gem.info.length > 100 ? "#{gem.info[0, 100]}..." : gem.info;
+
+      puts "#{gem.name}\n"
+      puts "#{info}\n\n"
     end
   end
 
