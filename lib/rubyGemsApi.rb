@@ -6,11 +6,11 @@ Faraday.default_adapter = :net_http
 
 class RubyGemsApi
   def initialize
-    @baseUri = "https://rubygems.org/api"
+    @base_uri = "https://rubygems.org/api"
   end
 
-  def getGemByName(name)
-    uri = "#{@baseUri}/v1/gems/#{name}"
+  def get_gem_by_name(name)
+    uri = "#{@base_uri}/v1/gems/#{name}"
     response = Faraday.get(uri)
 
     if response.status != 200
@@ -18,16 +18,16 @@ class RubyGemsApi
       exit(false)
     end
 
-    parsedBody = JSON.parse(response.body)
-    gemInfo = GemInfo.new
-    gemInfo.name = parsedBody['name']
-    gemInfo.info = parsedBody['info']
+    parsed_body = JSON.parse(response.body)
+    gem_info = GemInfo.new
+    gem_info.name = parsed_body['name']
+    gem_info.info = parsed_body['info']
 
-    gemInfo
+    gem_info
   end
 
-  def searchGems(searchTerm)
-    uri = "#{@baseUri}/v1/search?query=#{searchTerm}"
+  def search_gems(search_term)
+    uri = "#{@base_uri}/v1/search?query=#{search_term}"
     response = Faraday.get(uri)
     
     if response.status != 200
@@ -35,16 +35,16 @@ class RubyGemsApi
       exit(false)
     end
     
-    parsedBody = JSON.parse(response.body)
+    parsed_body = JSON.parse(response.body)
 
-    gemsInfo = []
-    for gem in parsedBody
-      gemInfo = GemInfo.new
-      gemInfo.name = gem['name']
-      gemInfo.info = gem['info']
-      gemsInfo.append(gemInfo)
+    gems_info = []
+    for gem in parsed_body
+      gem_info = GemInfo.new
+      gem_info.name = gem['name']
+      gem_info.info = gem['info']
+      gems_info.append(gem_info)
     end
 
-    gemsInfo
+    gems_info
   end
 end
