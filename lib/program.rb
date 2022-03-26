@@ -7,8 +7,14 @@ class Program
     ruby_gems_api = RubyGemsApi.new
 
     arguments = ArgumentsParser.parse
-    gems_info = ruby_gems_api.get_gem_by_name(arguments.search_term)
-    display_gem_info(gems_info)
+
+    if (arguments.name != '')
+      gem_info = ruby_gems_api.get_gem_by_name(arguments.name)
+      display_gem_info(gem_info)
+    elsif (arguments.search_term != '')
+      gems_info = ruby_gems_api.search_gems(arguments.search_term)
+      display_gems_info(gems_info)
+    end
   end
 
   def self.display_gem_info(gem_info)
