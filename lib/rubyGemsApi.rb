@@ -9,10 +9,25 @@ class RubyGemsApi
     @baseUri = "https://rubygems.org/api"
   end
 
+  def getGemByName(name)
+    uri = "#{@baseUri}/v1/gems/#{name}"
+    response = Faraday.get(uri)
+
+    if response.status != 200
+      puts "Error, got status #{response.status}"
+      exit(false)
+    end
+
+    parsedBody = JSON.parse(response.body)
+    gemInfo = GemInfo.new
+    gemInfo.name = parsedBody['name']
+    gemInfo.info = parsedBody['info']
+
+    gemInfo
+  end
+
   def searchGems(searchTerm)
-    arguments = ArgumentsParser.parse
     uri = "#{@baseUri}/v1/search?query=#{searchTerm}"
-    puts uri
     response = Faraday.get(uri)
     
     if response.status != 200
@@ -30,6 +45,6 @@ class RubyGemsApi
       gemsInfo.append(gemInfo)
     end
 
-    return gemsInfo
+    gemsInfo
   end
 end
