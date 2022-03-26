@@ -1,10 +1,5 @@
-require 'optparse'
-require 'faraday'
-require 'faraday/net_http'
-require 'json'
 require './lib/argumentsParser.rb'
 require './lib/rubyGemsApi.rb'
-Faraday.default_adapter = :net_http
 
 class Program
 
