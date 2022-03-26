@@ -26,7 +26,7 @@ class RubyGemsApi
     gem_info
   end
 
-  def search_gems(search_term)
+  def search_gems(search_term, search_limit)
     uri = "#{@base_uri}/v1/search?query=#{search_term}"
     response = Faraday.get(uri)
     
@@ -38,7 +38,9 @@ class RubyGemsApi
     parsed_body = JSON.parse(response.body)
 
     gems_info = []
-    for gem in parsed_body
+    limit = parsed_body.count > search_limit && search_limit > 0 ? search_limit : parsed_body.count
+    for i in 0..limit - 1
+      gem = parsed_body[i]
       gem_info = GemInfo.new
       gem_info.name = gem['name']
       gem_info.info = gem['info']

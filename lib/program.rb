@@ -12,7 +12,7 @@ class Program
       gem_info = ruby_gems_api.get_gem_by_name(arguments.name)
       display_gem_info(gem_info)
     elsif (arguments.search_term != '')
-      gems_info = ruby_gems_api.search_gems(arguments.search_term)
+      gems_info = ruby_gems_api.search_gems(arguments.search_term, arguments.search_limit)
       display_gems_info(gems_info)
     end
   end
