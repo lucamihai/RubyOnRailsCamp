@@ -7,17 +7,21 @@ class Program
     rubyGemsApi = RubyGemsApi.new
 
     arguments = ArgumentsParser.parse
-    gemsInfo = rubyGemsApi.searchGems(arguments.searchTerm)
-    displayGemsInfo(gemsInfo)
+    gemsInfo = rubyGemsApi.getGemByName(arguments.searchTerm)
+    displayGemInfo(gemsInfo)
+  end
+
+  def self.displayGemInfo(gemInfo)
+    info = gemInfo.info.length > 100 ? "#{gemInfo.info[0, 100]}..." : gemInfo.info;
+
+    puts "#{gemInfo.name}\n"
+    puts "#{info}\n\n"
   end
 
   def self.displayGemsInfo(gemsInfo)
     puts "Found #{gemsInfo.count} gems"
-    for gem in gemsInfo
-      info = gem.info.length > 100 ? "#{gem.info[0, 100]}..." : gem.info;
-
-      puts "#{gem.name}\n"
-      puts "#{info}\n\n"
+    for gemInfo in gemsInfo
+      displayGemInfo(gemInfo)
     end
   end
 
