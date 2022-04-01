@@ -20,15 +20,9 @@ class RubyGemsApi
     uri = "#{@base_uri}/v1/search?query=#{search_term}"
     parsed_body = get_json_response(uri)
 
-    gems = []
     limit = parsed_body.count > search_limit && search_limit > 0 ? search_limit : parsed_body.count
-    for i in 0..limit - 1
-      gem = parsed_body[i]
-      gem = MyGem.new(gem['name'], gem['info'])
-      gems.append(gem)
-    end
-
-    gems
+    gems = parsed_body.map{ |gem_body| MyGem.new(gem_body['name'], gem_body['info']) }
+    gems[0..limit - 1]
   end
 
   private
