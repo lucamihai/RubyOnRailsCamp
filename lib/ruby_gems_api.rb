@@ -1,5 +1,5 @@
 require './lib/my-gem.rb'
-require './lib/http-service'
+require './lib/http_service'
 require 'faraday/net_http'
 require 'json'
 Faraday.default_adapter = :net_http
