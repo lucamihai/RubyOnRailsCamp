@@ -6,7 +6,7 @@ class Program
   def self.execute
     ruby_gems_api = RubyGemsApi.new
 
-    arguments = ArgumentsParser.parse
+    arguments = ArgumentsParser.parse(ARGV)
 
     if (arguments.name != '')
       gem_info = ruby_gems_api.gem_by_name(arguments.name)
