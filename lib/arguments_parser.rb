@@ -10,6 +10,8 @@ module ArgumentsParser
     return arguments
   end
 
+  private
+
   # TODO: use something more reliable than just assuming each argument's position
   def self.get_name
     if ARGV[0] == 'show'

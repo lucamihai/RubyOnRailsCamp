@@ -17,6 +17,8 @@ class Program
     end
   end
 
+  private
+
   def self.display_gem_info(gem_info)
     info = gem_info.info.length > 100 ? "#{gem_info.info[0, 100]}..." : gem_info.info;
 
