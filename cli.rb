@@ -1,5 +1,6 @@
 require './lib/program.rb'
 
-Program.execute
+program = Program.new
+program.execute
 
 exit(true)
