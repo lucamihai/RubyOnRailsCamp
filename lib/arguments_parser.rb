@@ -1,7 +1,7 @@
 require "./lib/arguments.rb"
 
-class ArgumentsParser
-  def self.parse()
+module ArgumentsParser
+  def self.parse
     arguments = Arguments.new
     arguments.name = get_name
     arguments.search_term = get_search_term
@@ -11,7 +11,7 @@ class ArgumentsParser
   end
 
   # TODO: use something more reliable than just assuming each argument's position
-  def self.get_name()
+  def self.get_name
     if ARGV[0] == 'show'
       return ARGV[1]
     else
@@ -20,7 +20,7 @@ class ArgumentsParser
   end
 
   # TODO: use something more reliable than just assuming each argument's position
-  def self.get_search_term()
+  def self.get_search_term
     if ARGV[0] == 'search'
       return ARGV[1]
     else
@@ -29,7 +29,7 @@ class ArgumentsParser
   end
 
   # TODO: use something more reliable than just assuming each argument's position
-  def self.get_search_limit()
+  def self.get_search_limit
     if (ARGV[2] == '--limit')
       return ARGV[3].to_i
     else

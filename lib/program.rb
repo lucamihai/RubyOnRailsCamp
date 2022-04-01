@@ -1,5 +1,5 @@
-require './lib/argumentsParser.rb'
-require './lib/rubyGemsApi.rb'
+require './lib/arguments_parser.rb'
+require './lib/ruby_gems_api.rb'
 
 class Program
 
@@ -9,7 +9,7 @@ class Program
     arguments = ArgumentsParser.parse
 
     if (arguments.name != '')
-      gem_info = ruby_gems_api.get_gem_by_name(arguments.name)
+      gem_info = ruby_gems_api.gem_by_name(arguments.name)
       display_gem_info(gem_info)
     elsif (arguments.search_term != '')
       gems_info = ruby_gems_api.search_gems(arguments.search_term, arguments.search_limit)
