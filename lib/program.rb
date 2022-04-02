@@ -15,7 +15,7 @@ class Program
       display_gem_info(gem_info)
       puts "---------------------------------\n"
     end
-    
+
     if (arguments.search_term != '')
       gems_info = @ruby_gems_api.search_gems(arguments.search_term, arguments.search_limit)
       display_gems_info(gems_info)
