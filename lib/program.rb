@@ -7,8 +7,8 @@ class Program
     @ruby_gems_api = ruby_gems_api
   end
 
-  def execute
-    arguments = ArgumentsParser.parse(ARGV)
+  def execute(args)
+    arguments = ArgumentsParser.parse(args)
 
     if (arguments.name != '')
       gem_info = @ruby_gems_api.gem_by_name(arguments.name)
