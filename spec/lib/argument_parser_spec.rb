@@ -1,4 +1,6 @@
 require "rspec"
+require 'spec_helper'
+
 require "./lib/arguments_parser.rb"
 
 RSpec.describe ArgumentsParser do
