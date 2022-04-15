@@ -1,4 +1,6 @@
-class MyGem
+require './lib/jsonable.rb'
+
+class MyGem < JSONable
   
   def initialize(name, info)
     @name = name
