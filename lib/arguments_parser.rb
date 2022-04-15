@@ -12,31 +12,34 @@ module ArgumentsParser
 
   private
 
-  # TODO: use something more reliable than just assuming each argument's position
   def self.get_name(args)
-    if args[0] == 'show'
-      return args[1]
-    else
-      return ''
+    for i in 0..args.count
+      if args[i] == 'show'
+        return args[i + 1]
+      end
     end
+    
+    return ''
   end
 
-  # TODO: use something more reliable than just assuming each argument's position
   def self.get_search_term(args)
-    if args[0] == 'search'
-      return args[1]
-    else
-      return ''
+    for i in 0..args.count
+      if args[i] == 'search'
+        return args[i + 1]
+      end
     end
+    
+    return ''
   end
 
-  # TODO: use something more reliable than just assuming each argument's position
   def self.get_search_limit(args)
-    if (args[2] == '--limit')
-      return args[3].to_i
-    else
-      return 0
+    for i in 0..args.count
+      if args[i] == '--limit'
+        return args[i + 1].to_i
+      end
     end
+    
+    return 0
   end
 
 end

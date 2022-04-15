@@ -1,3 +1,4 @@
+# Oh ruby, I love you so much for not offering this by default :/
 class JSONable
   def to_json(options = {})
     hash = {}
