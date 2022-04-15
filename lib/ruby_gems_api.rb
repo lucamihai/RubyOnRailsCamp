@@ -13,12 +13,21 @@ class RubyGemsApi
   end
 
   def gem_by_name(name)
-    #gem_from_cache = @cache_service.
+    gem_from_cache = @cache_service.get_cached_show_result(name, 48)
+
+    if (gem_from_cache != nil)
+      puts "got it from cache"
+      return gem_from_cache
+    end
 
     uri = "#{@base_uri}/v1/gems/#{name}"
     json_gem = @http_service.get(uri)
+    puts ":( got 'em from ruby gems api"
     
     gem = MyGem.new(json_gem['name'], json_gem['info'])
+    @cache_service.cache_show_result(name, gem)
+    
+    gem
   end
 
   def search_gems(search_term, search_limit)

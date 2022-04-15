@@ -1,4 +1,6 @@
-class RubyGemsShowCacheEntry
+require './lib/jsonable.rb'
+
+class RubyGemsShowCacheEntry < JSONable
   def initialize(name, time, result)
     @name = name
     @time = time
