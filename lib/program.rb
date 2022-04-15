@@ -11,32 +11,34 @@ class Program
     arguments = ArgumentsParser.parse(args)
 
     if (arguments.name != '')
-      gem_info = @ruby_gems_api.gem_by_name(arguments.name)
-      display_gem_info(gem_info)
+      gem = @ruby_gems_api.gem_by_name(arguments.name)
+      display_gem(gem)
       puts "---------------------------------\n"
     end
 
     if (arguments.search_term != '')
-      gems_info = @ruby_gems_api.search_gems(arguments.search_term, arguments.search_limit)
-      display_gems_info(gems_info)
+      gems = @ruby_gems_api.search_gems(arguments.search_term, arguments.search_limit, arguments.license, arguments.order_by_downloads_descending)
+      display_gems(gems)
     end
   end
 
   private
 
-  def display_gem_info(gem_info)
+  def display_gem(gem)
     puts "---------------------------------\n"
-    info = gem_info.info.length > 100 ? "#{gem_info.info[0, 100]}..." : gem_info.info;
+    info = gem.info.length > 100 ? "#{gem.info[0, 100]}..." : gem.info;
 
-    puts "#{gem_info.name}\n"
-    puts "#{info}\n"
+    puts "Name: #{gem.name}\n"
+    puts "Description: #{info}\n"
+    puts "Licenses: #{gem.licenses != nil ? gem.licenses.join(', ') : ''}"
+    puts "Downloads: #{gem.downloads}"
   end
 
-  def display_gems_info(gems_info)
+  def display_gems(gems)
     puts "---------------------------------\n"
-    puts "Found #{gems_info.count} gems\n"
-    for gem_info in gems_info
-      display_gem_info(gem_info)
+    puts "Found #{gems.count} gems\n"
+    for gem in gems
+      display_gem(gem)
     end
     puts "---------------------------------\n"
   end

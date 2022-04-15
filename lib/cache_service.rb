@@ -24,7 +24,7 @@ class CacheService
     elsif (cache_entry.time < get_time_minus_hours(last_hours))
       nil
     else
-      cache_entry.result.map{ |hash| MyGem.new(hash['name'], hash['info']) }
+      cache_entry.result.map{ |hash| MyGem.new(hash['name'], hash['info'], hash['licenses'], hash['downloads']) }
     end
   end
 
@@ -87,7 +87,7 @@ class CacheService
     elsif (cache_entry.time < get_time_minus_hours(last_hours))
       nil
     else
-      MyGem.new(cache_entry.result['name'], cache_entry.result['info'])
+      MyGem.new(cache_entry.result['name'], cache_entry.result['info'], cache_entry.result['licenses'], cache_entry.result['downloads'])
     end
   end
 
@@ -111,9 +111,6 @@ class CacheService
       cache_entries = json_object.map{ |entry| RubyGemsShowCacheEntry.new(entry['name'], entry['time'], entry['result']) }
       cache_entry = cache_entries.find{ |x| x.name == name}
 
-      pp cache_entries
-      puts cache_entries.class
-
       if (cache_entry != nil)
         cache_entry.time = Time.now
         cache_entry.result = result
@@ -124,7 +121,6 @@ class CacheService
       end
 
       cache_file.write(JSON.generate(cache_entries))
-      pp cache_entries
 
     else
       new_cache_entry = RubyGemsShowCacheEntry.new(name, Time.now, result)
