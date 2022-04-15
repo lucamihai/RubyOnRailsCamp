@@ -32,6 +32,7 @@ class Program
     puts "Description: #{info}\n"
     puts "Licenses: #{gem.licenses != nil ? gem.licenses.join(', ') : ''}"
     puts "Downloads: #{gem.downloads}"
+    puts "Downloads: #{format_number(gem.downloads)}"
   end
 
   def display_gems(gems)
@@ -41,6 +42,22 @@ class Program
       display_gem(gem)
     end
     puts "---------------------------------\n"
+  end
+
+  def format_number(number)
+    number_as_string = number.to_s
+    formatted_number = ' '
+
+    for i in 0..number_as_string.length - 1
+      reversed_i = number_as_string.length - 1 - i
+      formatted_number.insert(0, number_as_string[reversed_i])
+
+      if ((i + 1) % 3 == 0 && i != number_as_string.length - 1)
+        formatted_number.insert(0, ',')
+      end
+    end
+
+    formatted_number
   end
 
 end
