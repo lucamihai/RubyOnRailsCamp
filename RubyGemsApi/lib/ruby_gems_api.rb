@@ -46,9 +46,7 @@ class RubyGemsApi
     puts ":( got 'em from ruby gems api"
 
     limit = gems.count > search_limit && search_limit > 0 ? search_limit : gems.count
-    pp gems
-    new_gems = filter_gems(gems, search_limit, license, order_by_downloads_descending)
-    pp new_gems
+    filter_gems(gems, search_limit, license, order_by_downloads_descending)
   end
 
   private
