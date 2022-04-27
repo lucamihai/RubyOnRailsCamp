@@ -9,6 +9,9 @@ GEM
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.2)
+    graphicsmagick (1.0.6)
+      subexec
+    mini_magick (4.11.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     rack (2.2.3)
@@ -33,6 +36,7 @@ GEM
       rack (~> 2.2)
       rack-protection (= 2.2.0)
       tilt (~> 2.0)
+    subexec (0.2.3)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -45,6 +49,8 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   faraday
+  graphicsmagick
+  mini_magick
   rspec
   sinatra
   thin
