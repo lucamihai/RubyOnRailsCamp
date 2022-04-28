@@ -4,8 +4,12 @@ require './lib/arguments'
 
 module MemeGenerator
   def self.generate_meme(arguments)
-    if (arguments.original_image_path == nil || arguments.final_image_path == nil || arguments.text == nil)
-      raise 'You need to provide at least original_image_path, final_image_path and text in order to generate some spicy memes'
+    if (arguments.original_image_path == nil || arguments.final_image_path == nil)
+      raise 'You need to provide at least original_image_path and final_image_path in order to generate some spicy memes'
+    end
+
+    if (arguments.captions.count == 0)
+      raise 'How can you expect to generate a meme without captions?'
     end
 
     original_image_path = arguments.original_image_path
@@ -21,14 +25,17 @@ module MemeGenerator
     end
 
     image = MiniMagick::Image.open(original_image_path)
-    image.combine_options do |c|
-      c.gravity(arguments.gravity)
-      c.stroke(arguments.under_color)
-      c.strokewidth(1)
-      c.fill(arguments.fill_color)
-      c.pointsize arguments.point_size
-      c.draw "text 0,300 '#{arguments.text}'" 
-      c.font arguments.font
+    
+    for caption in arguments.captions
+      image.combine_options do |c|
+        c.stroke(caption.under_color)
+        c.strokewidth(1)
+        c.fill(caption.fill_color)
+        c.pointsize caption.point_size
+        c.font(caption.font)
+        c.gravity("Center")
+        c.draw("text #{caption.position_x},#{caption.position_y} '#{caption.text}'")
+      end
     end
 
     if (temp_image_path != nil)
