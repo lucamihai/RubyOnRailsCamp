@@ -1,6 +1,6 @@
 require 'json'
-require './lib/arguments'
-require './lib/caption'
+require './entities/arguments'
+require './entities/caption'
 
 module RequestBodyParser
   def self.extract_arguments(request_body_contents)
