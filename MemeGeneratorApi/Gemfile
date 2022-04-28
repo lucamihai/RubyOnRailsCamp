@@ -4,6 +4,7 @@ gem "rspec"
 gem "faraday"
 gem "dotenv"
 gem "sinatra"
+gem "open-uri"
 gem "thin"
 gem 'mini_magick'
 gem 'graphicsmagick'
