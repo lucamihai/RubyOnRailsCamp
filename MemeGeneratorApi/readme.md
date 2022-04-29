@@ -2,7 +2,8 @@
 
 ## Setup
 
-You'll need to install [GraphicsMagick](http://www.graphicsmagick.org/), then restart your computer. 
+* You'll need to install [GraphicsMagick](http://www.graphicsmagick.org/), then restart your computer.
+* You'll also need to install [SQLite3](https://www.sqlite.org/index.html) (version 3.6.16 or newer) on your computer.
 
 ## Starting the server
 
