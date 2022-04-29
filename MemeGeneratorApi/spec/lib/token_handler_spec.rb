@@ -16,6 +16,24 @@ RSpec.describe TokenHandler do
   end
 
   describe ".is_valid" do
+    context "for nil token" do
+      it "returns false" do
+        user_repository_mock = double('user_repository', user_exists: true )
+        token_handler = TokenHandler.new(user_repository_mock)
+
+        expect(token_handler.is_valid(nil)).to eq false
+      end
+    end
+
+    context "for empty token" do
+      it "returns false" do
+        user_repository_mock = double('user_repository', user_exists: true )
+        token_handler = TokenHandler.new(user_repository_mock)
+
+        expect(token_handler.is_valid('')).to eq false
+      end
+    end
+
     context "for existing user" do
       it "returns true" do
         user_repository_mock = double('user_repository', user_exists: true )

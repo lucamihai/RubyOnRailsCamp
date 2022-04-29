@@ -2,9 +2,11 @@ require 'json'
 require 'sinatra'
 require './lib/request_body_parser'
 require './lib/meme_generator'
+require './middleware/authorization_middleware'
 
 class MemeGeneratorController < Sinatra::Base
 
+  use AuthorizationMiddleware
   use ErrorHandlingMiddleware
 
   post '/memes' do
