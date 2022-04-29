@@ -17,7 +17,6 @@ module RequestBodyParser
 
   def self.extract_signup_arguments(request_body_contents)
     request_payload = JSON.parse(request_body_contents)
-    pp request_payload
     SignupArguments.new(request_payload['username'], request_payload['password'])
   end
 

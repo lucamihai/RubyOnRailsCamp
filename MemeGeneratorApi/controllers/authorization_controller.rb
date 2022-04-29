@@ -4,6 +4,9 @@ require './lib/request_body_parser'
 require './lib/authorization_handler'
 
 class AuthorizationController < Sinatra::Base
+  
+  use ErrorHandlingMiddleware
+
   def initialize(app = nil, authorization_handler = AuthorizationHandler.new)
     super(app)
     @authorization_handler = authorization_handler
@@ -19,5 +22,4 @@ class AuthorizationController < Sinatra::Base
     @authorization_handler.login(login_arguments.username, login_arguments.password)
   end
 
-  
 end
