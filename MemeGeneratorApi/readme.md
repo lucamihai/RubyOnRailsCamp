@@ -23,6 +23,7 @@ Perform HTTP requests to the following endpoints:
 
 ### Generate meme
 POST <server_url>/memes
+Must include Authorization header with the token obtained from POST <server_url>/auth/login
 ```
 {
     "original_image_path": "images\\meme_templates\\senator_armstrong.jpg",
@@ -52,3 +53,25 @@ POST <server_url>/memes
 **Notice** : please don't include texts containg the ``[']`` character. I was too lazy to escape it.
 
 Redirects to an image of the generated meme.
+
+
+### Signup
+POST <server_url>/auth/signup
+```
+{
+    "username": "admin",
+    "password": "1234"
+}
+```
+Returns 200 if successful.
+
+
+### Login
+POST <server_url>/auth/login
+```
+{
+    "username": "admin",
+    "password": "1234"
+}
+```
+Returns a bearer token if succcessful. The token must be used in methods where authentication is required.
