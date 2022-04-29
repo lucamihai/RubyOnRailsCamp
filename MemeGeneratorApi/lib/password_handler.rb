@@ -6,6 +6,6 @@ class PasswordHandler
   end
 
   def is_same_password(password, encrypted_password)
-    BCrypt::Password.new(encrypted_password) == plain_password
+    BCrypt::Password.new(encrypted_password) == password
   end
 end
