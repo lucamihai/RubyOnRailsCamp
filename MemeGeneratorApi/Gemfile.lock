@@ -13,6 +13,7 @@ GEM
     faraday-net_http (2.0.2)
     graphicsmagick (1.0.6)
       subexec
+    jwt (2.3.0)
     mini_magick (4.11.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
@@ -62,6 +63,7 @@ DEPENDENCIES
   dotenv
   faraday
   graphicsmagick
+  jwt
   mini_magick
   open-uri
   rspec
