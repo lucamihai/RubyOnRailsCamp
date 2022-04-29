@@ -5,10 +5,10 @@ require './lib/meme_generator'
 
 class MemeGeneratorController < Sinatra::Base
   post '/memes' do
-    arguments = RequestBodyParser.extract_arguments(request.body.read)
-    meme_absolute_file_path = MemeGenerator.generate_meme(arguments)
-    #redirect to("file:///#{meme_absolute_file_path}"), 303
+    meme_arguments = RequestBodyParser.extract_meme_arguments(request.body.read)
+
+    meme_absolute_file_path = MemeGenerator.generate_meme(meme_arguments)
+    
     send_file("#{meme_absolute_file_path}")
   end
-  
 end

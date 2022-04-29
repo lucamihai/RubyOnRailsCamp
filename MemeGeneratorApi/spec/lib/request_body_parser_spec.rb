@@ -4,7 +4,7 @@ require 'spec_helper'
 require "./lib/request_body_parser.rb"
 
 RSpec.describe RequestBodyParser do
-  describe ".extract_arguments" do
+  describe ".extract_meme_arguments" do
     context "Given request with all arguments" do
       subject {
         request_body_contents = '
@@ -29,7 +29,7 @@ RSpec.describe RequestBodyParser do
           ]
         }'
        
-        RequestBodyParser.extract_arguments(request_body_contents) 
+        RequestBodyParser.extract_meme_arguments(request_body_contents) 
       }
       it "returns expected entity" do
         expect(subject.original_image_path).to eq "original.jpg"
@@ -55,7 +55,7 @@ RSpec.describe RequestBodyParser do
           "original_image_path": "original.jpg",
           "final_image_path": "final.jpg"
         }'
-        RequestBodyParser.extract_arguments(request_body_contents) 
+        RequestBodyParser.extract_meme_arguments(request_body_contents) 
       }
       it "returns expected entity" do
         expect(subject.original_image_path).to eq "original.jpg"
@@ -67,12 +67,46 @@ RSpec.describe RequestBodyParser do
     context "Given request with no arguments" do
       subject {
         request_body_contents = '{}'
-        RequestBodyParser.extract_arguments(request_body_contents) 
+        RequestBodyParser.extract_meme_arguments(request_body_contents) 
       }
       it "returns expected entity" do
         expect(subject.original_image_path).to eq nil
         expect(subject.final_image_path).to eq nil
         expect(subject.captions).to eq []
+      end
+    end
+  end
+
+  describe ".extract_signup_arguments" do
+    context "Given request with no captions" do
+      it "returns expected entity" do
+        request_body_contents = '
+        {
+          "username": "admin",
+          "password": "1234"
+        }'
+
+        signup_arguments = RequestBodyParser.extract_signup_arguments(request_body_contents)
+
+        expect(signup_arguments.username).to eq "admin"
+        expect(signup_arguments.password).to eq "1234"
+      end
+    end
+  end
+
+  describe ".extract_login_arguments" do
+    context "Given request with no captions" do
+      it "returns expected entity" do
+        request_body_contents = '
+        {
+          "username": "admin",
+          "password": "1234"
+        }'
+
+        signup_arguments = RequestBodyParser.extract_login_arguments(request_body_contents)
+
+        expect(signup_arguments.username).to eq "admin"
+        expect(signup_arguments.password).to eq "1234"
       end
     end
   end

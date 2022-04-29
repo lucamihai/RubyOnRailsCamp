@@ -1,21 +1,34 @@
 require 'json'
-require './entities/arguments'
-require './entities/caption'
+require './entities/meme_arguments'
+require './entities/meme_caption'
+require './entities/signup_arguments'
+require './entities/login_arguments'
 
 module RequestBodyParser
-  def self.extract_arguments(request_body_contents)
+  def self.extract_meme_arguments(request_body_contents)
     request_payload = JSON.parse(request_body_contents)
-    captions = extract_captions(request_payload)
+    captions = extract_meme_captions(request_payload)
 
-    arguments = Arguments.new(
+    meme_arguments = MemeArguments.new(
       request_payload['original_image_path'],
       request_payload['final_image_path'],
       captions)
   end
 
+  def self.extract_signup_arguments(request_body_contents)
+    request_payload = JSON.parse(request_body_contents)
+    pp request_payload
+    SignupArguments.new(request_payload['username'], request_payload['password'])
+  end
+
+  def self.extract_login_arguments(request_body_contents)
+    request_payload = JSON.parse(request_body_contents)
+    LoginArguments.new(request_payload['username'], request_payload['password'])
+  end
+
   private
 
-  def self.extract_captions(request_payload)
+  def self.extract_meme_captions(request_payload)
     captions_payload = request_payload['captions']
     captions = []
 
@@ -24,7 +37,7 @@ module RequestBodyParser
     end
 
     for caption_payload in captions_payload
-      caption = Caption.new(
+      caption = MemeCaption.new(
         caption_payload['text'],
         caption_payload['font'] || 'Arial',
         caption_payload['fill_color'] || 'White',

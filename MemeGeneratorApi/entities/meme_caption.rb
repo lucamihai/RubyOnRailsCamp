@@ -1,4 +1,4 @@
-class Caption
+class MemeCaption
   @text
   @font
   @fill_color

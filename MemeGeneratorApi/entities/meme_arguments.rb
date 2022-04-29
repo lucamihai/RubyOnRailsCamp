@@ -1,4 +1,4 @@
-class Arguments
+class MemeArguments
   @original_image_path
   @final_image_path
   @captions

@@ -19,7 +19,7 @@ class UserRepository
     if (result.count == 0)
       raise MyException.new('user does not exist', 404)
     end
-
+    
     user_db_row = result[0]
     User.new(user_db_row[0], user_db_row[1])
   end

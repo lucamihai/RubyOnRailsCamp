@@ -1,6 +1,6 @@
 require 'mini_magick'
-require "open-uri"
-require './entities/arguments'
+require 'open-uri'
+require './entities/meme_arguments'
 
 module MemeGenerator
   def self.generate_meme(arguments)

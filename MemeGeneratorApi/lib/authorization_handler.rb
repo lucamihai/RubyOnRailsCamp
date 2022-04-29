@@ -28,7 +28,7 @@ class AuthorizationHandler
   def login(username, password)
     validate_credentials(username, password)
     user = @user_repository.get_user(username)
-
+    
     if (!@password_handler.is_same_password(password, user.password))
       raise MyException.new('incorrect password', 401)
     end
