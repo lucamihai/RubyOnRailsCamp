@@ -9,3 +9,4 @@ gem "thin"
 gem 'mini_magick'
 gem 'graphicsmagick'
 gem 'bcrypt'
+gem 'sqlite3'
